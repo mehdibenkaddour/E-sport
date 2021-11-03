@@ -4,6 +4,8 @@ import { Redirect } from 'react-router';
 import League from '../leagues/League';
 import LeaguesList from '../leagues/LeaguesList';
 import './Menu.css';
+import TeamsList from '../Teams/TeamsList';
+import Team from '../Teams/Team'
 function Menu() {
     return ( 
         <Router className="menu">
@@ -19,8 +21,10 @@ function Menu() {
                     <Route exact path='/'>
                         <Redirect to="/leagues" />
                     </Route>
-                    <Route path='/leagues' component={LeaguesList} />
+                    <Route exact path='/leagues/' component={LeaguesList} />
                     <Route path="/leagues/:idLeague" component={League}/>
+                    <Route exact path='/teams/' component={TeamsList} />
+                    <Route path="/teams/:idTeam" component={Team}/>
                 </Switch>
             </div>
       </Router>

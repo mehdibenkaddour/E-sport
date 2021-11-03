@@ -1,11 +1,28 @@
 .card{
   margin: 50px;;
 }
-.listLeagues{
+.listLeagues, .listTeams{
   width: max-content;
   margin: auto;
+  text-align: center;
 }
 .pagination{
   width: max-content;
   margin: auto;
+}
+.leagueDetails,.teamDetails{
+  width: max-content;
+  margin: auto;
+  text-align: center;
+  font-style: italic;
+  font-style: 24px;
+}
+.seriesName{
+  text-align: center;
+}
+.details{
+  text-align: right;
+}
+.vainqueur{
+  text-align: right;
 }

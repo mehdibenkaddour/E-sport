@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import leaguesAPI from './LeaguesAPI';
+import teamsAPI from './TeamsAPI';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -8,19 +8,18 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Pagination from '@mui/material/Pagination';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import League from './League';
-class LeaguesList extends Component {
+class TeamsList extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
-            leagues: [],
+            teams: [],
             x_page:1,
             x_per_page:5,
             x_total:0,
          }
     }
     componentDidMount(){
-        leaguesAPI(this.state.x_page,this.state.x_per_page).then(
+        teamsAPI(this.state.x_page,this.state.x_per_page).then(
             (response) => {
                 this.setState({
                     x_total: response.headers.get("X-Total"),
@@ -30,7 +29,7 @@ class LeaguesList extends Component {
         ).then(
             (response) => {
                 this.setState({
-                    leagues: response,
+                    teams: response,
                 })
             }
         )
@@ -39,37 +38,33 @@ class LeaguesList extends Component {
 
         this.setState({
             x_page: value,
-        },() => {leaguesAPI(this.state.x_page,this.state.x_per_page).then(
+        },() => {teamsAPI(this.state.x_page,this.state.x_per_page).then(
             (response) => {
                 return response.json()
             }
         ).then(
             (response) => {
                 this.setState({
-                    leagues: response,
+                    teams: response,
                 })
             }
         );});
     }
     render() { 
         return (
-            <div className="listLeagues">
-                {this.state.leagues.map(( leagues, index ) => {
+            <div className="listTeams">
+                {this.state.teams.map(( team, index ) => {
                     return (
                         <Card sx={{ maxWidth: 345 }} className="card">
                             <CardMedia
                             component="img"
                             alt="green iguana"
                             height="140"
-                            image={leagues.image_url}
+                            image={team.image_url}
                             />
-                            <CardContent>
-                                <Typography gutterBottom variant="h5" component="div">
-                                    {leagues.name}
-                                </Typography>
-                            </CardContent>
+                            <span>{team.name}</span>
                             <CardActions className="details">
-                                <Link to={'/leagues/'+leagues.id} className="nav-link">Details</Link>
+                                <Link to={'/teams/'+team.id} className="nav-link">Details</Link>
                             </CardActions>
                         </Card>
                     );
@@ -90,4 +85,4 @@ class LeaguesList extends Component {
     }
 }
  
-export default LeaguesList;
+export default TeamsList;
