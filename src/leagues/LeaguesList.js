@@ -7,6 +7,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Pagination from '@mui/material/Pagination';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import League from './League';
 class LeaguesList extends Component {
     constructor(props) {
         super(props);
@@ -67,7 +69,10 @@ class LeaguesList extends Component {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small">Learn More</Button>
+                                <Router>
+                                    <Button size="small"><Link to={'/leagues/'+leagues.id} className="nav-link">Details</Link></Button>
+                                </Router>
+
                             </CardActions>
                         </Card>
                     );
