@@ -31,10 +31,10 @@ class Team extends Component {
     }
     render() {
         let playersName = "";
-        if(this.state.players.length != 0){
-            this.state.players.map((player,index) => {
-                playersName += player.name + " ";
-            })
+        if(this.state.players.length !== 0){
+            this.state.players.map((player,index) => (
+                playersName += player.name + " "
+            ))
         }
         return ( 
             <div className="teamDetails">

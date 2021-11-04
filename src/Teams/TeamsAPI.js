@@ -7,7 +7,7 @@ function teamsAPI(page,perpage,game){
         }
       };
     let linkApi;
-    if(game="all-games"){
+    if(game === "all-games"){
         linkApi = process.env.REACT_APP_LEAGUES_API_URL + "/teams?page=" + page + "&per_page=" + perpage;
     }
     else {

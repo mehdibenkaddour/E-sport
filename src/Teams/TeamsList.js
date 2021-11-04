@@ -1,10 +1,10 @@
-import React, { Component, useContext } from 'react';
+import React from 'react';
 import teamsAPI from './TeamsAPI';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardMedia from '@mui/material/CardMedia';
 import Pagination from '@mui/material/Pagination';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Link } from 'react-router-dom';
 import GameContext from '../Context/Game';
 class TeamsList extends React.Component {
     static contextType = GameContext;
