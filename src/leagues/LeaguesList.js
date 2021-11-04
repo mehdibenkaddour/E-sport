@@ -41,7 +41,7 @@ class LeaguesList extends Component {
     }
     componentDidUpdate(prevProps, prevState, snapshot){
         console.log(prevState.game);
-        if(this.context != prevState.game){
+        if(this.context !== prevState.game){
             leaguesAPI(this.state.x_page,this.state.x_per_page,this.context).then(
                 (response) => {
                     this.setState({

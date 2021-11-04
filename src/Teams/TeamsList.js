@@ -36,7 +36,7 @@ class TeamsList extends React.Component {
         )
     }
     componentDidUpdate(prevProps, prevState, snapshot){
-        if(this.context!=prevState.game){
+        if(this.context !== prevState.game){
             teamsAPI(this.state.x_page,this.state.x_per_page,this.context).then(
                 (response) => {
                     this.setState({
