@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 .card{
   margin: 50px;;
 }
@@ -20,8 +21,14 @@
 .seriesName{
   text-align: center;
 }
-.details{
-  text-align: right;
+.details a{
+  text-decoration: none;
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: white;
+  font-size: 15px;
+}
+.details {
+  justify-content:center;
 }
 .vainqueur{
   text-align: right;

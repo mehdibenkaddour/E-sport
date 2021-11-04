@@ -3,8 +3,9 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 import { withRouter } from "react-router-dom";
-import { BrowserRouter as Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 class League extends Component {
     constructor(props) {
         super(props);
@@ -52,8 +53,8 @@ class League extends Component {
                                     From : {serie.begin_at} To : {serie.end_at}
                                 </Typography>
                             </CardContent>
-                            <CardActions>
-                                    <Link to={'/teams/'+serie.winner_id} className="nav-link vainqueur">{serie.winner_id ? "Vainqueur" : ""}</Link>
+                            <CardActions className="details">
+                                <Button variant="contained"><Link to={'/teams/'+serie.winner_id} className="nav-link vainqueur">{serie.winner_id ? "Vainqueur" : "Pas de Vainqueur"}</Link></Button>
                             </CardActions>
                         </Card>
                     );

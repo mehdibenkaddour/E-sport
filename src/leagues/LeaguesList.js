@@ -6,8 +6,11 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Pagination from '@mui/material/Pagination';
-import { BrowserRouter as Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import {Link} from 'react-router-dom';
+import GameContext from '../Context/Game';
 class LeaguesList extends Component {
+    static contextType = GameContext;
     constructor(props) {
         super(props);
         this.state = { 
@@ -15,23 +18,46 @@ class LeaguesList extends Component {
             x_page:1,
             x_per_page:5,
             x_total:0,
+            game:""
          }
     }
     componentDidMount(){
         leaguesAPI(this.state.x_page,this.state.x_per_page).then(
             (response) => {
                 this.setState({
-                    x_total: response.headers.get("X-Total"),
+                    x_total: response.headers.get("x-total"),
                 })
                 return response.json()
             }
         ).then(
             (response) => {
+                console.log(this.context);
                 this.setState({
+                    game:this.context,
                     leagues: response,
                 })
             }
         )
+    }
+    componentDidUpdate(prevProps, prevState, snapshot){
+        console.log(prevState.game);
+        if(this.context != prevState.game){
+            leaguesAPI(this.state.x_page,this.state.x_per_page,this.context).then(
+                (response) => {
+                    this.setState({
+                        x_total: response.headers.get("x-total"),
+                    })
+                    return response.json()
+                }
+            ).then(
+                (response) => {
+                    this.setState({
+                        leagues: response,
+                        game:this.context,
+                    })
+                }
+            )    
+        }
     }
     handlePageChange(event,value){
 
@@ -67,7 +93,7 @@ class LeaguesList extends Component {
                                 </Typography>
                             </CardContent>
                             <CardActions className="details">
-                                <Link to={'/leagues/'+leagues.id} className="nav-link">Details</Link>
+                            <Button variant="contained"><Link to={'leagues/'+leagues.id} className="nav-link">Details</Link></Button>
                             </CardActions>
                         </Card>
                     );

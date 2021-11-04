@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext,useRef,useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
 import League from '../leagues/League';
@@ -14,11 +14,22 @@ import GameContext from '../Context/Game';
 function Menu() {
     const {gameContext, setGameContext} = useContext(GameContext);
     const handleChange = event => setGameContext(event.target.value);
+    const mounted = useRef();
+    useEffect(() => {
+    if (!mounted.current) {
+        // do componentDidMount logic
+        mounted.current = true;
+    } else {
+        console.log("Componenet did update :");
+        console.log(gameContext);
+    }
+    });
     return (
         <Router className="menu">
             <div>
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
                     <ul className="navbar-nav mr-auto">
+                        <h3><Link to={'/'} className="slogon">E-sport game API</Link></h3>
                         <li><Link to={'/leagues'} className="nav-link">Leagues</Link></li>
                         <li><Link to={'/teams'} className="nav-link"> Teams </Link></li>
                         <li>
@@ -28,9 +39,10 @@ function Menu() {
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={gameContext ?? " "}
-                                label="Age"
                                 onChange={handleChange}
+                                className="menuGame"
                                 >
+                                    <MenuItem value={"all-games"}>All games</MenuItem>
                                     <MenuItem value={"csgo"}>CS-go</MenuItem>
                                     <MenuItem value={"codmw"}>Call of Duty</MenuItem>
                                     <MenuItem value={"dota2"}>Dota 2</MenuItem>
@@ -47,7 +59,11 @@ function Menu() {
                         <Route exact path='/'>
                             <Redirect to="/leagues" />
                         </Route>
-                        <Route exact path='/leagues/' component={LeaguesList} />
+                        <Route exact path='/leagues/' >
+                            <GameContext.Provider value={gameContext}>
+                                <LeaguesList />
+                            </GameContext.Provider>
+                        </Route>
                         <Route path="/leagues/:idLeague" component={League}/>
                         <Route exact path='/teams/'>
                             <GameContext.Provider value={gameContext}>
@@ -57,7 +73,6 @@ function Menu() {
                         <Route path="/teams/:idTeam" component={Team}/>
                 </Switch>
             </div>
-            {console.log(gameContext)}
         </Router>
     );
 }

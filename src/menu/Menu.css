@@ -1,16 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 .navbar ul {
     list-style-type: none;
-    margin: 0;
-    padding: 10px;
+    margin: 0 auto 20px;
+    padding: 8px;
     overflow: hidden;
     background-color: #3f51b5;
+}
+.navbar h3 {
+    float: left;
+    color: white;
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .navbar li {
     float: right;
     color: white;
     border: 2px solid white;
-    margin: 10px;
+    margin: 8px;
 }
 
 .navbar li a {
@@ -19,8 +25,17 @@
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .menu{
     margin: 20px;
     padding: 20px;
+}
+.slogon{
+    text-decoration: none;
+    color: white;
+}
+.menuGame{
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+    color: white !important;
 }

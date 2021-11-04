@@ -4,7 +4,7 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardMedia from '@mui/material/CardMedia';
 import Pagination from '@mui/material/Pagination';
-import { BrowserRouter as Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import GameContext from '../Context/Game';
 class TeamsList extends React.Component {
     static contextType = GameContext;
@@ -15,23 +15,44 @@ class TeamsList extends React.Component {
             x_page:1,
             x_per_page:5,
             x_total:0,
+            game:""
          }
     }
     componentDidMount(){
         teamsAPI(this.state.x_page,this.state.x_per_page,this.context).then(
             (response) => {
                 this.setState({
-                    x_total: response.headers.get("X-Total"),
+                    x_total: response.headers.get("x-total"),
                 })
                 return response.json()
             }
         ).then(
             (response) => {
                 this.setState({
+                    game:this.context,
                     teams: response,
                 })
             }
         )
+    }
+    componentDidUpdate(prevProps, prevState, snapshot){
+        if(this.context!=prevState.game){
+            teamsAPI(this.state.x_page,this.state.x_per_page,this.context).then(
+                (response) => {
+                    this.setState({
+                        x_total: response.headers.get("x-total"),
+                    })
+                    return response.json()
+                }
+            ).then(
+                (response) => {
+                    this.setState({
+                        game:this.context,
+                        teams: response,
+                    })
+                }
+            )    
+        }
     }
     handlePageChange(event,value){
 
@@ -49,7 +70,7 @@ class TeamsList extends React.Component {
             }
         );});
     }
-    render() { 
+    render() {
         return (
             <div className="listTeams">
                 {this.state.teams.map(( team, index ) => {
@@ -63,7 +84,7 @@ class TeamsList extends React.Component {
                             />
                             <span>{team.name}</span>
                             <CardActions className="details">
-                                <Link to={'/teams/'+team.id} className="nav-link">Details</Link>
+                                <Link to={'teams/'+team.id} className="nav-link">Details</Link>
                             </CardActions>
                         </Card>
                     );
