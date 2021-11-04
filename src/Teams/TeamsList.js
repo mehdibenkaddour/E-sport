@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import teamsAPI from './TeamsAPI';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -8,7 +8,9 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Pagination from '@mui/material/Pagination';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import GameContext from '../Context/Game';
 class TeamsList extends React.Component {
+    static contextType = GameContext;
     constructor(props) {
         super(props);
         this.state = { 
@@ -19,7 +21,7 @@ class TeamsList extends React.Component {
          }
     }
     componentDidMount(){
-        teamsAPI(this.state.x_page,this.state.x_per_page).then(
+        teamsAPI(this.state.x_page,this.state.x_per_page,this.context).then(
             (response) => {
                 this.setState({
                     x_total: response.headers.get("X-Total"),

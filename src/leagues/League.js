@@ -44,7 +44,6 @@ class League extends Component {
                 <h1>{this.state.league.name}</h1>
                 {console.log(this.state.videogame)}
                 <p>Game : {this.state.videogame.name}</p>
-                <hr/>
                 {this.state.series.map(( serie, index ) => {
                     return (
                         <Card sx={{ maxWidth: 500 }} className="card">
